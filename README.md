@@ -1,7 +1,8 @@
-# **OSSF Project/WG Name**
+# **Package Manager Best Practices**
 
-[Brief description of the initiative]
+Collection of security best practices documentation for various package managers
 
+A project under the [Best Practices for Open Source Developers WG](https://github.com/ossf/wg-best-practices-os-developers).
 
 ## 
 **Motivation**
@@ -33,9 +34,7 @@
 # 
 **Get Involved**
 
-*   Official communications occur on the [ADD LINK TO YOUR WG MAILING LIST] (ex: https://lists.openssf.org/g/openssf-tac/topics).  \
-[Manage your subscriptions to Open SSF mailing lists](https://lists.openssf.org/g/main/subgroups).
-*   [Add Slack information if availabable]
+*   See [Best Practices for Open Source Developers WG](https://github.com/ossf/wg-best-practices-os-developers) for meetings/lists/slack/etc.
 
 ### 
 Quick Start
