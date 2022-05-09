@@ -6,11 +6,11 @@
 
 1. Towards the end of the draft phase, at the point the authors wish to engage
    wider collaboration, the authors may open a PR with the draft document
-   against the `drafts/` directory. This PR will be merged by repository
+   against the `draft/` directory. This PR will be merged by repository
    maintainers without review. At this time the above "In progress:" issue
    should be closed.
 
-1. The document may live in `drafts/` for as long as the authors
+1. The document may live in `draft/` for as long as the authors
    wish. Repository maintainers will merge any PRs from authors on these drafts
    without review.
 
