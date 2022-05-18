@@ -61,7 +61,8 @@ a dependency must meet before it is used.
        names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
        so developers need not worry about homograph attacks from the public registry, whereby an attacker
        names their package using non-ascii characters that render similar to an
-       ascii character.
+       ascii character. Note that this property is registry-dependent;
+       you will need to verify this policy with any registry you use.
 
 1. When you identify a GitHub project of interest, follow their documentation
    to identify the corresponding package name.
