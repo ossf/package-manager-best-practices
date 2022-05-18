@@ -59,7 +59,7 @@ a dependency must meet before it is used.
 
     1. Note: Non-ASCII characters are [no longer supported in npm package
        names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
-       so developers need not worry about homograph attacks, whereby an attacker
+       so developers need not worry about homograph attacks from the public registry, whereby an attacker
        names their package using non-ascii characters that render similar to an
        ascii character.
 
