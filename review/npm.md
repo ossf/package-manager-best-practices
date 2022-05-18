@@ -57,7 +57,7 @@ a dependency must meet before it is used.
        attack vector to be aware of. For example: [JSONStream](https://www.npmjs.com/package/JSONStream),
        [jsonstream](https://www.npmjs.com/package/jsonstream).
 
-    1. Note: Non-ASCII characters are [not supported in npm package
+    1. Note: Non-ASCII characters are [no longer supported in npm package
        names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
        so developers need not worry about homograph attacks, whereby an attacker
        names their package using non-ascii characters that render similar to an
