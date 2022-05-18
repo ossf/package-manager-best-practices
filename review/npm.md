@@ -53,7 +53,7 @@ a dependency must meet before it is used.
    assess its trustworthiness through, for example, its number of contributors,
    stars, etc.
 
-    1. Note: Non-ASCII characters and uppercase ASCII characters are [not
+    1. Note: Non-ASCII characters and uppercase ASCII characters are [no longer
        supported in npm package
        names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
        so developers need not worry about homograph attacks, whereby an attacker
