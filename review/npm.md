@@ -123,8 +123,13 @@ dependencies and pinning by hash.
 #### Vendoring dependencies
 
 Vendoring dependencies means keeping a local copy of all the dependencies
-(direct and transitive) in the repository. Note that updates to dependencies
-may generate large pull requests in the repository's commit history.
+(direct and transitive) in the repository. While vendoring can solve the
+"reproducable installation" problem, it also can encourage insecure practices.
+These include, poor ability to audit dependency code, difficulties keeping
+dependencies up to date, and more. Also, vendoring introduces non-security problems
+like repository size, usability, and developer experience issues. For these
+reasons, vendoring is not recommended without tooling and solutions to address
+those problems which is outside the scope of this document.
 
 #### Use a Lockfile
 
