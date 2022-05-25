@@ -19,7 +19,7 @@ alternative.
     + [Declaration](#declaration)
     + [Reproducible installation](#reproducible-installation)
       - [Vendoring dependencies](#vendoring-dependencies)
-      - [Hash pinning](#hash-pinning)
+      - [Use a Lockfile](#use-a-lockfile)
         * [Package-lock.json](#package-lockjson)
         * [Shrinkwrap.json](#shrinkwrapjson)
     + [Maintenance](#maintenance)
@@ -126,11 +126,13 @@ Vendoring dependencies means keeping a local copy of all the dependencies
 (direct and transitive) in the repository. Note that updates to dependencies
 may generate large pull requests in the repository's commit history.
 
-#### Hash pinning
+#### Use a Lockfile
 
+Use a lockfile because it implements hash pinning using cryptographic hashes.
 Hash pinning informs the package manager the expected hash for each dependency,
 without trusting the registries. The package manager then verifies, during each
-installation, that the hash of each dependency remains the same.
+installation, that the hash of each dependency remains the same. Any malicious
+change to the dependency would be detected and rejected.
 
 Npm provides two options to achieve hash pinning.
 
