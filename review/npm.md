@@ -53,24 +53,28 @@ a dependency must meet before it is used.
    assess its trustworthiness through, for example, its number of contributors,
    stars, etc.
 
-    1. Note: Non-ASCII characters and uppercase ASCII characters are [not
-       supported in npm package
-       names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
-       so developers need not worry about homograph attacks, whereby an attacker
-       names their package using non-ascii characters that render similar to an
-       ascii character.
+    1. Additionally, uppercase characters were previously allowed, which is another
+       attack vector to be aware of. For example: [JSONStream](https://www.npmjs.com/package/JSONStream),
+       [jsonstream](https://www.npmjs.com/package/jsonstream).
 
-2. When you identify a GitHub project of interest, follow their documentation
+    1. Note: Non-ASCII characters are [no longer supported in npm package
+       names](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#name),
+       so developers need not worry about homograph attacks from the public registry, whereby an attacker
+       names their package using non-ascii characters that render similar to an
+       ascii character. Note that this property is registry-dependent;
+       you will need to verify this policy with any registry you use.
+
+1. When you identify a GitHub project of interest, follow their documentation
    to identify the corresponding package name.
 
    Use [OpenSSF Security Scorecards](http://github.com/ossf/scorecard) to
    learn about the current security posture of the dependency.
 
-3. Use [deps.dev](http://deps.dev) to learn about the security posture of
-   transitive dependencies using. You may list transitive dependencies by using
+1. Use [deps.dev](http://deps.dev) to learn about the security posture of
+   transitive dependencies. You may list transitive dependencies by using
    [component analysis](https://github.com/microsoft/component-detection/).
 
-4. Use [npm-audit](https://docs.npmjs.com/cli/v8/commands/npm-audit) to learn
+1. Use [npm-audit](https://docs.npmjs.com/cli/v8/commands/npm-audit) to learn
    about existing vulnerabilities in the dependencies of the project.
 
 **Warning**: Organization verification does not exist on the npm registry and
