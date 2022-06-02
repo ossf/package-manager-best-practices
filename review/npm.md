@@ -213,9 +213,7 @@ run.
    create the manifest file.
 
 1. To add a dependency to a manifest file, ***locally*** run [`npm
-   install`](https://docs.npmjs.com/cli/v8/commands/npm-install) or [`npm
-   install
-   --package-lock-only`](https://docs.npmjs.com/cli/v8/commands/npm-install).
+   install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
 1. In automated environments (e.g., in CI or production) or when building
    artifacts for end-users (e.g., container images, etc):
