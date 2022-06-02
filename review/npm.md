@@ -224,7 +224,7 @@ run.
     1. Never run commands that may update the lock files or fetch unpinned
        dependencies:
 
-        1. `npm install` and `npm i`
+        1. `npm install`, `npm i`, `npm install -g`
 
         1. `npm update`
 
@@ -244,23 +244,8 @@ run.
         1. To run tests, run [`npm
            install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
 
-    1. If you need to run a CLI package `tool-cli` from the registry:
-
-        1. Always declare it via a "wrapper" manifest file:
-           ```json
-           {
-             "name": "wrapper-tool-cli",
-             "version": "1.0.0",
-             "dependencies": {
-               "tool-cli": "4.1.1"
-             }
-           }
-           ```
-
-        1. ***Locally*** generate the corresponding lock file via `npm install
-           --package-lock-only`
-
-        1. Commit both files to the repository:
+    1. If you need to run a CLI package from the registry, ensure the package is a part of
+       your package.json and package-lock.json before reaching the automated environment.
 
 1. If a project is a CLI application (`main` entry in the manifest file),
    developers may publish a shrinkwrap.json.
