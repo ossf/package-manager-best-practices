@@ -245,7 +245,7 @@ run.
            install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
 
     1. If you need to run a CLI package from the registry, ensure the package is a part of
-       your package.json and package-lock.json before reaching the automated environment.
+       the dependencies defined in your project via the `package.json` file, prior to being installed at build-time in your CI or otherwise automated environment.
 
 1. If a project is a CLI application (`main` entry in the manifest file),
    developers may publish a shrinkwrap.json.
