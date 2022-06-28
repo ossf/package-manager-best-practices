@@ -288,18 +288,17 @@ run.
        the dependencies defined in your project via the `package.json` file, prior to
        being installed at build-time in your CI or otherwise automated environment.
 
-1. In non-privileged environments, maintainers may **ignore** the lockfile. This is particularly useful in
-   situations where they want to exercise a wide range of dependency versions, to discover / fix problems before
+1. In **non-privileged environments**, maintainers may **ignore** the lockfile. This is particularly useful in
+   situations where they want to exercise a wide range of dependency versions in order to discover / fix problems before
    their users do. This is useful for maintainers of libraries and standalone CLI projects
-   without shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
-   so using floating versions in (non-privileged) tests is beneficial.
+   without a shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
+   so using floating versions in (non-privileged) tests can be beneficial.
    
-   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow with access to **no** GitHub secrets and with its
-   permissions defined as `read-all`. 
+   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with its
+   permissions defined as `permissions: read-all` at the top of the workflow. 
    
-   1. You may ignore the lockfile by running `npm install --no-package-lock`
-   in your pre-submit tests. If you are not certain whether the environment you are running is privileged or not,
-   reach out to your security team. 
+   1. In a **non-privileged environment**, you may ignore the lockfile by running `npm install --no-package-lock`.
+   If you are not certain whether the environment you are running is privileged or not, reach out to your security team. 
 
 ### Maintenance
 
