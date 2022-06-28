@@ -17,6 +17,7 @@ alternative.
   * [Dependency management](#dependency-management)
     + [Intake](#intake)
     + [Declaration](#declaration)
+    + [Project types](#project-types)
     + [Reproducible installation](#reproducible-installation)
       - [Vendoring dependencies](#vendoring-dependencies)
       - [Use a Lockfile](#use-a-lockfile)
@@ -94,6 +95,24 @@ commitish are allowed.
 **Note**: The manifest file ***does not*** list transitive dependencies; it
 lists only direct project dependencies.
 
+### Project types
+
+In the rest of this document, we will refer to three types of projects:
+
+- **Libraries**: These are projects published on the Npm registry and consumed
+by other projects in the form of API calls. (Their manifest file 
+contains a `lib` entry).
+
+- **Stand-alone CLIs**: These are projects published on the Npm registry
+and consumed by end-users in the form of locally installed programs. 
+An example would be [clipboard-cli](https://github.com/sindresorhus/clipboard-cli).
+(Their manifest file contains a `main` entry).
+
+- **Application projects**: These are projects that teams collaborate on in
+development and deploy, such as web sites and/or web applications. 
+An example would be a React web app for a company's user-facing SaaS.
+
+
 ### Reproducible installation
 
 A reproducible installation is one that guarantees the exact same copy the
@@ -120,6 +139,11 @@ benefits, including:
 - Mitigating package mutability introduced by mis-configured registries that
   proxy packages from public registries. Note: Versions are immutable in
   principle, but immutability is enforced by the registry.
+
+- Improve tthe accuracy of automated tools such as GitHub's security alerts.
+
+- Let maintainers test updates before accepting them in the `main` branch, 
+  e.g., via renovatebot's [stabilityDays](https://docs.renovatebot.com/configuration-options/#stabilitydays).
 
 There are two ways to reliably achieve a reproducible installation: vendoring
 dependencies and pinning by hash.
@@ -215,8 +239,24 @@ run.
 1. To add a dependency to a manifest file, ***locally*** run [`npm
    install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
-1. In automated environments (e.g., in CI or production) or when building
-   artifacts for end-users (e.g., container images, etc):
+1. If a project is a standalone CLI, developers may publish a shrinkwrap.json. 
+   Remember that, by declaring a shrinkwrap.json, you take responsibility 
+   for updating all the dependencies in time. Your users will not be able 
+   to update them. 
+
+1. If a project is a library, a shrinkwrap.json should ***not*** be published. 
+   The reasoning is that version resolution should be left to the package consumer. 
+   Allow all versions from the minimum to the latest you support, e.g.,
+   `^m.n.o` to pin to a major range; `~m.n.o` to pin to a minor range. Avoid versions
+   with critical vulnerabilities as much as possible. Visit the [semver
+   calculator](https://semver.npmjs.com/) to help you define the ranges.
+
+1. Projects that do no use a shrinkwrap.json (libraries, standalone CLIs
+   or application projects) should declare and commit a package-lock.json to their repository. 
+   The reasoning is that this lockfile will provide the benefits highlighted in
+   [Reproducible installation](#reproducible-installation) by default for for privileged environments
+   (project contributors' machines, CI, production or other environments with access to sensitive data, 
+   such as secrets, PII, write/push permission to the repository, etc). To generate the lockfile:
 
     1. Always generate a package-lock.json ***locally*** and commit it to the
        repository.
@@ -245,18 +285,17 @@ run.
            install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
 
     1. If you need to run a CLI package from the registry, ensure the package is a part of
-       the dependencies defined in your project via the `package.json` file, prior to being installed at build-time in your CI or otherwise automated environment.
+       the dependencies defined in your project via the `package.json` file, prior to
+       being installed at build-time in your CI or otherwise automated environment.
 
-1. If a project is a CLI application (`main` entry in the manifest file),
-   developers may publish a shrinkwrap.json.
-
-1. If a project is a library (`lib` entry in the manifest file), a
-   shrinkwrap.json should ***not*** be published. The reasoning is that version
-   resolution should be left to the package consumer. Allow all versions from
-   the minimum to the latest you support, e.g., `^m.n.o` to pin to a major
-   range; `~m.n.o` to pin to a minor range. Avoid versions with critical
-   vulnerabilities as much as possible. Visit the [semver
-   calculator](https://semver.npmjs.com/) to help you define the ranges.
+1. In non-privileged environments, maintainers may **ignore** the lockfile. This is particularly useful in
+   situations where they want to exercise a wide range of dependency versions, to discover / fix problems before
+   their users do. This is useful for maintainers of libraries and standalone CLI projects
+   without shrinkwrap.json since their users may use `npm install`. If you run CI via GitHub Actions,
+   a non-privileged environment is a workflow with access to **no** GitHub secrets and with its
+   permissions defined as `read-all`. You may ignore the lockfile by running `npm install --no-package-lock`
+   in your pre-submit tests. If you are not certain whether the environment you are running is privileged or not,
+   reach out to your security team. 
 
 ### Maintenance
 
