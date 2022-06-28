@@ -22,7 +22,7 @@ alternative.
       - [Vendoring dependencies](#vendoring-dependencies)
       - [Use a Lockfile](#use-a-lockfile)
         * [Package-lock.json](#package-lockjson)
-        * [Shrinkwrap.json](#shrinkwrapjson)
+        * [npm-shrinkwrap.json](#shrinkwrapjson)
     + [Maintenance](#maintenance)
   * [Release](#release)
     + [Account](#account)
@@ -103,8 +103,9 @@ In the rest of this document, we will refer to three types of projects:
 by other projects in the form of API calls. (Their manifest file 
 contains a `lib` entry).
 
-- **Standalone CLIs**: These are projects published on the npm registry
-and consumed by end-users in the form of locally installed programs. 
+- **Standalone CLIs**: These are projects published on the Npm registry
+and consumed by end-users in the form of locally installed programs that
+are **always** run stand alone via `npx` or via a global install.
 An example would be [clipboard-cli](https://github.com/sindresorhus/clipboard-cli).
 (Their manifest file contains a `bin` entry).
 
@@ -213,18 +214,18 @@ dependencies at load time using libraries available on the system. Using this
 lock file leaves the task of deciding dependencies' versions to use to the
 package consumer.
 
-##### Shrinkwrap.json
+##### npm-shrinkwrap.json
 
-[Shrinkwrap.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json#package-lockjson-vs-npm-shrinkwrapjson)
+[npm-shrinkwrap.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json#package-lockjson-vs-npm-shrinkwrapjson)
 is another lock file supported by npm. The main difference is that this lock
 file ***may*** be uploaded to a registry along with the package. This ensures that
 consumers of the dependency will obtain the same dependencies' hashes as the
-repo owners intended. With shrinkwrap.json, the package producer takes
+repo owners intended. With npm-shrinkwrap.json, the package producer takes
 responsibility for updating the dependencies on behalf of their consumers. It's
 akin to static linking for low-level programming languages: everything is
 declared at packaging time.
 
-To generate the shrinkwrap.json, an existing package-lock.json must be present
+To generate the npm-shrinkwrap.json, an existing package-lock.json must be present
 and the command [`npm
 shrinkwrap`](https://docs.npmjs.com/cli/v8/commands/npm-shrinkwrap) must be
 run.
@@ -239,19 +240,21 @@ run.
 1. To add a dependency to a manifest file, ***locally*** run [`npm
    install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
-1. If a project is a standalone CLI, developers may publish a shrinkwrap.json. 
-   Remember that, by declaring a shrinkwrap.json, you take responsibility 
+1. If a project is a standalone CLI, developers may publish a npm-shrinkwrap.json. 
+   Remember that, by declaring a npm-shrinkwrap.json, you take responsibility 
    for updating all the dependencies in time. Your users will not be able 
-   to update them. 
+   to update them. If you expect your CLI to be used by other projects and defined
+   in their package.json or lockfile, do **not** use npm-shrinkwrap.json because it will
+   hinder dependency resolution for your consumers.
 
-1. If a project is a library, a shrinkwrap.json should ***not*** be published. 
+1. If a project is a library, a npm-shrinkwrap.json should ***not*** be published. 
    The reasoning is that version resolution should be left to the package consumer. 
    Allow all versions from the minimum to the latest you support, e.g.,
    `^m.n.o` to pin to a major range; `~m.n.o` to pin to a minor range. Avoid versions
    with critical vulnerabilities as much as possible. Visit the [semver
    calculator](https://semver.npmjs.com/) to help you define the ranges.
 
-1. Projects that do no use a shrinkwrap.json (libraries, standalone CLIs
+1. Projects that do no use a npm-shrinkwrap.json (libraries, standalone CLIs
    or application projects) should declare and commit a package-lock.json to their repository. 
    The reasoning is that this lockfile will provide the benefits highlighted in
    [Reproducible installation](#reproducible-installation) by default for privileged environments
@@ -291,7 +294,7 @@ run.
 1. In **non-privileged environments**, maintainers may **ignore** the lockfile. This is particularly useful in
    situations where they want to exercise a wide range of dependency versions in order to discover / fix problems before
    their users do. This is useful for maintainers of libraries and standalone CLI projects
-   without a shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
+   without a npm-shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
    so using floating versions in (non-privileged) tests can be beneficial.
    
    1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with its
