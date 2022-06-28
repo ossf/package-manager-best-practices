@@ -299,7 +299,8 @@ run.
    
    1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with
    non-write permissions defined, such as `permissions: read-all`, `permissions:`, `contents: none`, `contents: read`.
-   For more information about permissions, refer to the [official documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token). You may install the [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
+   For more information about permissions, refer to the [official documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token). 
+   You may install the [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
    to flag non-read permissions on your project.
    
    1. In a **non-privileged environment**, you may ignore the lockfile by running `npm install --no-package-lock`.
