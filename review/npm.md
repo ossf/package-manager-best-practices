@@ -103,7 +103,7 @@ In the rest of this document, we will refer to three types of projects:
 by other projects in the form of API calls. (Their manifest file 
 contains a `lib` entry).
 
-- **Stand-alone CLIs**: These are projects published on the Npm registry
+- **Standalone CLIs**: These are projects published on the Npm registry
 and consumed by end-users in the form of locally installed programs. 
 An example would be [clipboard-cli](https://github.com/sindresorhus/clipboard-cli).
 (Their manifest file contains a `main` entry).
