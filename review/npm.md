@@ -240,19 +240,19 @@ run.
 1. To add a dependency to a manifest file, ***locally*** run [`npm
    install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
-1. If a project is a standalone CLI, developers may publish an `npm-shrinkwrap.json`. 
-   Remember that, by declaring an `npm-shrinkwrap.json`, you take responsibility 
-   for updating all the dependencies in time. Your users will not be able 
-   to update them. If you expect your CLI to be used by other projects and defined
-   in their package.json or lockfile, do **not** use `npm-shrinkwrap.json` because it will
-   hinder dependency resolution for your consumers.
-
 1. If a project is a library, an `npm-shrinkwrap.json` should ***not*** be published. 
    The reasoning is that version resolution should be left to the package consumer. 
    Allow all versions from the minimum to the latest you support, e.g.,
    `^m.n.o` to pin to a major range; `~m.n.o` to pin to a minor range. Avoid versions
    with critical vulnerabilities as much as possible. Visit the [semver
    calculator](https://semver.npmjs.com/) to help you define the ranges.
+
+1. If a project is a standalone CLI, developers may publish an `npm-shrinkwrap.json`. 
+   Remember that, by declaring an `npm-shrinkwrap.json`, you take responsibility 
+   for updating all the dependencies in time. Your users will not be able 
+   to update them. If you expect your CLI to be used by other projects and defined
+   in their package.json or lockfile, do **not** use `npm-shrinkwrap.json` because it will
+   hinder dependency resolution for your consumers.
 
 1. Projects that do no use a `npm-shrinkwrap.json` (libraries, standalone CLIs
    or application projects) should declare and commit a `package-lock.json` (or other dev-only lockfile) to their repository. 
