@@ -99,7 +99,7 @@ lists only direct project dependencies.
 
 In the rest of this document, we will refer to three types of projects:
 
-- **Libraries**: These are projects published on the Npm registry and consumed
+- **Libraries**: These are projects published on the npm registry and consumed
 by other projects in the form of API calls. (Their manifest file 
 contains a `lib` entry).
 
