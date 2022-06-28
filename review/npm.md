@@ -254,7 +254,7 @@ run.
 1. Projects that do no use a shrinkwrap.json (libraries, standalone CLIs
    or application projects) should declare and commit a package-lock.json to their repository. 
    The reasoning is that this lockfile will provide the benefits highlighted in
-   [Reproducible installation](#reproducible-installation) by default for for privileged environments
+   [Reproducible installation](#reproducible-installation) by default for privileged environments
    (project contributors' machines, CI, production or other environments with access to sensitive data, 
    such as secrets, PII, write/push permission to the repository, etc). To generate the lockfile:
 
@@ -284,14 +284,15 @@ run.
         1. To run tests, run [`npm
            install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
 
-    1. If you need to run a CLI package from the registry, ensure the package is a part of
+    1. If you need to run a standalone CLI package from the registry, ensure the package is a part of
        the dependencies defined in your project via the `package.json` file, prior to
        being installed at build-time in your CI or otherwise automated environment.
 
 1. In non-privileged environments, maintainers may **ignore** the lockfile. This is particularly useful in
    situations where they want to exercise a wide range of dependency versions, to discover / fix problems before
    their users do. This is useful for maintainers of libraries and standalone CLI projects
-   without shrinkwrap.json since their users may use `npm install`. If you run CI via GitHub Actions,
+   without shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
+   so using flaoting versions in (non-privileged) tests is beneficial. If you run CI via GitHub Actions,
    a non-privileged environment is a workflow with access to **no** GitHub secrets and with its
    permissions defined as `read-all`. You may ignore the lockfile by running `npm install --no-package-lock`
    in your pre-submit tests. If you are not certain whether the environment you are running is privileged or not,
