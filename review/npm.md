@@ -255,7 +255,7 @@ run.
    calculator](https://semver.npmjs.com/) to help you define the ranges.
 
 1. Projects that do no use a npm-shrinkwrap.json (libraries, standalone CLIs
-   or application projects) should declare and commit a package-lock.json to their repository. 
+   or application projects) should declare and commit a `package-lock.json` (or other dev-only lockfile) to their repository. 
    The reasoning is that this lockfile will provide the benefits highlighted in
    [Reproducible installation](#reproducible-installation) by default for privileged environments
    (project contributors' machines, CI, production or other environments with access to sensitive data, 
