@@ -106,7 +106,7 @@ contains a `lib` entry).
 - **Standalone CLIs**: These are projects published on the npm registry
 and consumed by end-users in the form of locally installed programs. 
 An example would be [clipboard-cli](https://github.com/sindresorhus/clipboard-cli).
-(Their manifest file contains a `main` entry).
+(Their manifest file contains a `bin` entry).
 
 - **Application projects**: These are projects that teams collaborate on in
 development and deploy, such as web sites and/or web applications. 
