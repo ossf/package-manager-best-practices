@@ -197,7 +197,7 @@ cryptographic hash of their content:
 }
 ```
 
-The package-lock.json file is a ***snapshot of an installation*** that allows
+The `package-lock.json` file is a ***snapshot of an installation*** that allows
 later reproduction of the same installation. As such, the lock file is
 generated or updated via the various commands that install packages, e.g., `npm
 install`. If some dependencies are missing or not pinned by hash (e.g.,
@@ -208,7 +208,7 @@ The lock file ***cannot*** be uploaded to a registry, which means that
 consumers who locally install the package via `npm install` may [see different
 dependency
 versions](https://dev.to/saurabhdaware/but-what-the-hell-is-package-lock-json-b04)
-than the repo owners used during testing. Using package-lock.json is akin to
+than the repo owners used during testing. Using `package-lock.json` is akin to
 dynamic linking for low-level programming languages: the loader will resolve
 dependencies at load time using libraries available on the system. Using this
 lock file leaves the task of deciding dependencies' versions to use to the
@@ -225,7 +225,7 @@ responsibility for updating the dependencies on behalf of their consumers. It's
 akin to static linking for low-level programming languages: everything is
 declared at packaging time.
 
-To generate the `npm-shrinkwrap.json`, an existing package-lock.json must be present
+To generate the `npm-shrinkwrap.json`, an existing `package-lock.json` must be present
 and the command [`npm
 shrinkwrap`](https://docs.npmjs.com/cli/v8/commands/npm-shrinkwrap) must be
 run.
@@ -261,7 +261,7 @@ run.
    (project contributors' machines, CI, production or other environments with access to sensitive data, 
    such as secrets, PII, write/push permission to the repository, etc). To generate the lockfile:
 
-    1. Always generate a package-lock.json ***locally*** and commit it to the
+    1. Always generate a `package-lock.json` ***locally*** and commit it to the
        repository.
 
     1. Never run commands that may update the lock files or fetch unpinned
