@@ -143,7 +143,7 @@ benefits, including:
 
 - Improve the accuracy of automated tools such as GitHub's security alerts.
 
-- Let maintainers test updates before accepting them in the `main` branch, 
+- Let maintainers test updates before accepting them in the default branch, 
   e.g., via renovatebot's [stabilityDays](https://docs.renovatebot.com/configuration-options/#stabilitydays).
 
 There are two ways to reliably achieve a reproducible installation: vendoring
