@@ -297,8 +297,10 @@ run.
    without an `npm-shrinkwrap.json`. The reasoning is that many downstream users will use `npm install` to install a dependency,
    so using floating versions in (non-privileged) tests can be beneficial.
    
-   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with its
-   permissions defined as `permissions: read-all` at the top of the workflow. 
+   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with
+   non-write permissions defined, such as `permissions: read-all`, `permissions:`, `contents: none`, `contents: read`.
+   For more information about permissions, refer to the [official documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token). You may install the [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
+   to flag non-read permissions on your project.
    
    1. In a **non-privileged environment**, you may ignore the lockfile by running `npm install --no-package-lock`.
    If you are not certain whether the environment you are running is privileged or not, reach out to your security team. 
