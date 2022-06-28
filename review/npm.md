@@ -101,7 +101,7 @@ In the rest of this document, we will refer to three types of projects:
 
 - **Libraries**: These are projects published on the npm registry and consumed
 by other projects in the form of API calls. (Their manifest file 
-contains a `lib` entry).
+typically contains a `main`, `exports`, `browser`, `module`, and/or `types` entry).
 
 - **Standalone CLIs**: These are projects published on the npm registry
 and consumed by end-users in the form of locally installed programs that
