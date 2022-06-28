@@ -292,9 +292,12 @@ run.
    situations where they want to exercise a wide range of dependency versions, to discover / fix problems before
    their users do. This is useful for maintainers of libraries and standalone CLI projects
    without shrinkwrap.json. The reasoning is that many downstream users will use `npm install` to install a dependency,
-   so using flaoting versions in (non-privileged) tests is beneficial. If you run CI via GitHub Actions,
-   a non-privileged environment is a workflow with access to **no** GitHub secrets and with its
-   permissions defined as `read-all`. You may ignore the lockfile by running `npm install --no-package-lock`
+   so using floating versions in (non-privileged) tests is beneficial.
+   
+   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow with access to **no** GitHub secrets and with its
+   permissions defined as `read-all`. 
+   
+   1. You may ignore the lockfile by running `npm install --no-package-lock`
    in your pre-submit tests. If you are not certain whether the environment you are running is privileged or not,
    reach out to your security team. 
 
