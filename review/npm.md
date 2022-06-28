@@ -112,7 +112,7 @@ An example would be [clipboard-cli](https://github.com/sindresorhus/clipboard-cl
 - **Application projects**: These are projects that teams collaborate on in
 development and deploy, such as web sites and/or web applications. 
 An example would be a React web app for a company's user-facing SaaS.
-
+(Their manifest file typically contains `"private": true`).
 
 ### Reproducible installation
 
