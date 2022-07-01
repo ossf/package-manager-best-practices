@@ -327,7 +327,8 @@ unpinned dependencies and update the lockfiles:
       for rapidly and consistently updating all the dependencies. Your users will not be able 
       to update or deduplicate them. If you expect your CLI to be used by other projects and defined
       in their `package.json` or lockfile, do **not** use `npm-shrinkwrap.json` because it will
-      hinder dependency resolution for your consumers.
+      hinder dependency resolution for your consumers: follow the recommendations as if your project
+      was a library.
 
    1. In CI, only run npm commands that treat the lockfile as
       read-only (see [Lockfiles and commands](#lockfiles-and-commands)).
