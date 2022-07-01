@@ -282,6 +282,10 @@ unpinned dependencies and update the lockfiles:
    install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install)
    and commit the updated manifest to the repository.
 
+1. If you need to run a standalone CLI package from the registry, ensure the package is a part of
+   the dependencies defined in your project via the `package.json` file, prior to
+   being installed at build-time in your CI or otherwise automated environment.
+
 1. Developers should declare and commit a lockfile for ***all*** their
    projects. The reasoning is that this lockfile will provide of
    [Reproducible installation](#reproducible-installation)
@@ -321,7 +325,10 @@ unpinned dependencies and update the lockfiles:
       in their `package.json` or lockfile, do **not** use `npm-shrinkwrap.json` because it will
       hinder dependency resolution for your consumers.
 
-   1. Developers should only run npm commands that treat the lockfile as
+   1. In CI, only run npm commands that treat the lockfile as
+      read-only (see [Lockfiles and commands](#lockfiles-and-commands)).
+
+   1. Locally, developers should only run npm commands that treat the lockfile as
       read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
       when intentionally adding /removing a dependency.
 
@@ -331,13 +338,12 @@ unpinned dependencies and update the lockfiles:
 
    1. Developers should declare and commit a lockfile to their repository.
 
-   1. Developers should only run npm commands that treat the lockfile as
+   1. In CI, only run npm commands that treat the lockfile as
+      read-only (see [Lockfiles and commands](#lockfiles-and-commands)).
+
+   1. Locally, developers should only run npm commands that treat the lockfile as
       read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
       when intentionally adding /removing a dependency.
-
-   1. If you need to run a standalone CLI package from the registry, ensure the package is a part of
-      the dependencies defined in your project via the `package.json` file, prior to
-      being installed at build-time in your CI or otherwise automated environment.
 
 ### Maintenance
 
