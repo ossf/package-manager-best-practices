@@ -251,7 +251,7 @@ Certain `npm` commmands treat the lockfiles as read-only, while others do not.
 The following commands treat the lock file as read-only:
 
 1. [`npm ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci), used to
-   install a project and its dependencies
+   install a project and its dependencies,
 
 1. [`npm install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test),
    used to install a project and run tests.
@@ -279,16 +279,17 @@ unpinned dependencies and update the lockfiles:
    create the manifest file. 
 
 1. To add a dependency to a manifest file, ***locally*** run [`npm
-   install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
+   install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install)
+   and commit the updated manifest to the repository.
 
 1. Developers should declare and commit a lockfile for ***all*** their
-   projects. The reasoning is that this lockfile provides the
-   benefits listed in [Reproducible installation](#reproducible-installation)
+   projects. The reasoning is that this lockfile will provide of
+   [Reproducible installation](#reproducible-installation)
    by default for privileged environments (project developers' machines,
    CI, production or other environments with access to sensitive data, 
    such as secrets, PII, write/push permission to the repository, etc).
    
-   When running tests locally, developers should locally use commands that treat lockfiles
+   When running tests locally, developers should use commands that treat a lockfile
    as read-only (see [Lockfiles and commands](#lockfiles-and-commands)), unless they
    are intentionally adding / removing a dependency.
 
@@ -304,11 +305,9 @@ unpinned dependencies and update the lockfiles:
       calculator](https://semver.npmjs.com/) to help you define the ranges.
 
    1. The lockfile `package-lock.json` ***should*** be ignored for tests running in CI
-      (e.g. via `npm install --no-package-lock`) ***and*** the CI environment should be ***non-privileged***
-      by following the [principle of least privilege](https://www.cisa.gov/uscert/bsi/articles/knowledge/principles/least-privilege).
-      This reasoning is that developers should exercise a wide range of dependency versions
-      in order to discover / fix problems before their users do, so tests need to pull the latest versions
-      of packages.
+      (e.g. via `npm install --no-package-lock`). The reasoning is that developers should
+      exercise a wide range of dependency versions in order to discover / fix problems
+      before their users do, so tests need to pull the latest versions of packages.
 
    1. Follow the principle of least privilege in your [CI configuration](#ci-configuration).
       This is particularly important since the lockfile is ignored.
