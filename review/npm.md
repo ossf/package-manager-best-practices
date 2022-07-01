@@ -287,7 +287,7 @@ unpinned dependencies and update the lockfiles:
    being installed at build-time in your CI or otherwise automated environment.
 
 1. Developers should declare and commit a lockfile for ***all*** their
-   projects. The reasoning is that this lockfile will provide of
+   projects. The reasoning is that this lockfile will provide the benefits of
    [Reproducible installation](#reproducible-installation)
    by default for privileged environments (project developers' machines,
    CI, production or other environments with access to sensitive data, 
@@ -309,9 +309,13 @@ unpinned dependencies and update the lockfiles:
       calculator](https://semver.npmjs.com/) to help you define the ranges.
 
    1. The lockfile `package-lock.json` ***should*** be ignored for tests running in CI
-      (e.g. via `npm install --no-package-lock`). The reasoning is that developers should
+      (e.g. via `npm install --no-package-lock`). The reasoning is that CI tests should
       exercise a wide range of dependency versions in order to discover / fix problems
-      before their users do, so tests need to pull the latest versions of packages.
+      before the library users do, so tests need to pull the latest versions of packages.
+
+   1. Locally, developers should only run npm commands that treat the lockfile as
+      read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
+      when intentionally adding /removing a dependency.
 
    1. Follow the principle of least privilege in your [CI configuration](#ci-configuration).
       This is particularly important since the lockfile is ignored.
