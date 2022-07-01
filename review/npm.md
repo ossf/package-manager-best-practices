@@ -250,14 +250,14 @@ Certain `npm` commmands treat the lockfiles as read-only, while others do not.
 
 The following commands treat the lock file as read-only:
 
-1. To install a project and its dependencies, use [`npm
-   ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci).
+1. [`npm ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci), used to
+   install a project and its dependencies
 
-1. To run tests, run [`npm
-   install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
+1. [`npm install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test),
+   used to install a project and run tests.
 
 The following commands ***do not*** treat the lock file as read-only, may fetch / install
-the unpinned dependencies and update the lockfiles:
+unpinned dependencies and update the lockfiles:
 
 1. `npm install`, `npm i`, `npm install -g`
 
