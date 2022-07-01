@@ -24,7 +24,7 @@ alternative.
       - [Use a Lockfile](#use-a-lockfile)
         * [Package-lock.json](#package-lockjson)
         * [npm-shrinkwrap.json](#shrinkwrapjson)
-        * [Lockfiles and commands](#lockfiles-and-commands)
+      - [Lockfiles and commands](#lockfiles-and-commands)
     + [Maintenance](#maintenance)
   * [Release](#release)
     + [Account](#account)
@@ -244,7 +244,7 @@ and the command [`npm
 shrinkwrap`](https://docs.npmjs.com/cli/v8/commands/npm-shrinkwrap) must be
 run.
 
-##### Lockfiles and commands
+#### Lockfiles and commands
 
 Certain `npm` commmands treat the lockfiles as read-only, while others do not.
 
