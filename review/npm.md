@@ -14,6 +14,7 @@ alternative.
 
 - [npm Best Practices Guide](#npm-best-practices-guide)
   * [TOC](#toc)
+  * [CI configuration](#ci-configuration)
   * [Dependency management](#dependency-management)
     + [Intake](#intake)
     + [Declaration](#declaration)
@@ -23,6 +24,7 @@ alternative.
       - [Use a Lockfile](#use-a-lockfile)
         * [Package-lock.json](#package-lockjson)
         * [npm-shrinkwrap.json](#shrinkwrapjson)
+        * [Lockfiles and commands](#lockfiles-and-commands)
     + [Maintenance](#maintenance)
   * [Release](#release)
     + [Account](#account)
@@ -31,6 +33,18 @@ alternative.
   * [Private packages](#private-packages)
     + [Scopes](#scopes)
     + [Private registry configurations](#private-registry-configurations)
+
+## CI configuration
+
+Follow the [principle of least privilege](https://www.cisa.gov/uscert/bsi/articles/knowledge/principles/least-privilege)
+for your CI configuration.
+
+If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to
+GitHub secrets and with non-write permissions defined, such as `permissions: read-all`, `permissions:`,
+`contents: none`, `contents: read`. For more information about permissions, refer to the [official documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token). 
+
+You may install the [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
+to flag non-read permissions on your project.
 
 ## Dependency management
 
@@ -230,81 +244,101 @@ and the command [`npm
 shrinkwrap`](https://docs.npmjs.com/cli/v8/commands/npm-shrinkwrap) must be
 run.
 
+##### Lockfiles and commands
+
+Certain `npm` commmands treat the lockfiles as read-only, while others do not.
+
+The following commands treat the lock file as read-only:
+
+1. To install a project and its dependencies, use [`npm
+   ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci).
+
+1. To run tests, run [`npm
+   install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
+
+The following commands ***do not*** treat the lock file as read-only, may fetch / install
+the unpinned dependencies and update the lockfiles:
+
+1. `npm install`, `npm i`, `npm install -g`
+
+1. `npm update`
+
+1. `npm install-test`
+
+1. `npm pkg set` and `npm pkg delete`
+
+1. `npm exec`, `npx`
+
+1. `npm set-script`
+
 **Recommendations:**
 
 1. Developers should declare and commit a manifest file for ***all*** their
    projects. Use the official [Creating a package.json
    file](https://docs.npmjs.com/creating-a-package-json-file) documentation to
-   create the manifest file.
+   create the manifest file. 
 
 1. To add a dependency to a manifest file, ***locally*** run [`npm
    install --save <dep-name>`](https://docs.npmjs.com/cli/v8/commands/npm-install).
 
-1. If a project is a library, an `npm-shrinkwrap.json` should ***not*** be published. 
-   The reasoning is that version resolution should be left to the package consumer. 
-   Allow all versions from the minimum to the latest you support, e.g.,
-   `^m.n.o` to pin to a major range; `~m.n.o` to pin to a minor range. Avoid versions
-   with critical vulnerabilities as much as possible. Visit the [semver
-   calculator](https://semver.npmjs.com/) to help you define the ranges.
-
-1. If a project is a standalone CLI, developers may publish an `npm-shrinkwrap.json`. 
-   Remember that, by declaring an `npm-shrinkwrap.json`, you take responsibility 
-   for updating all the dependencies in time. Your users will not be able 
-   to update them. If you expect your CLI to be used by other projects and defined
-   in their package.json or lockfile, do **not** use `npm-shrinkwrap.json` because it will
-   hinder dependency resolution for your consumers.
-
-1. Projects that do no use a `npm-shrinkwrap.json` (libraries, standalone CLIs
-   or application projects) should declare and commit a `package-lock.json` (or other dev-only lockfile) to their repository. 
-   The reasoning is that this lockfile will provide the benefits highlighted in
-   [Reproducible installation](#reproducible-installation) by default for privileged environments
-   (project contributors' machines, CI, production or other environments with access to sensitive data, 
-   such as secrets, PII, write/push permission to the repository, etc). To generate the lockfile:
-
-    1. Always generate a `package-lock.json` ***locally*** and commit it to the
-       repository.
-
-    1. Never run commands that may update the lock files or fetch unpinned
-       dependencies:
-
-        1. `npm install`, `npm i`, `npm install -g`
-
-        1. `npm update`
-
-        1. `npm install-test`
-
-        1. `npm pkg set` and `npm pkg delete`
-
-        1. `npm exec`, `npx`
-
-        1. `npm set-script`
-
-    1. Only run commands that treat the lock file as read-only:
-
-        1. To install a project and its dependencies, use [`npm
-           ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci).
-
-        1. To run tests, run [`npm
-           install-ci-test`](https://docs.npmjs.com/cli/v8/commands/npm-install-ci-test).
-
-    1. If you need to run a standalone CLI package from the registry, ensure the package is a part of
-       the dependencies defined in your project via the `package.json` file, prior to
-       being installed at build-time in your CI or otherwise automated environment.
-
-1. In **non-privileged environments**, maintainers may **ignore** the lockfile. This is particularly useful in
-   situations where they want to exercise a wide range of dependency versions in order to discover / fix problems before
-   their users do. This is useful for maintainers of libraries and standalone CLI projects
-   without an `npm-shrinkwrap.json`. The reasoning is that many downstream users will use `npm install` to install a dependency,
-   so using floating versions in (non-privileged) tests can be beneficial.
+1. Developers should declare and commit a lockfile for ***all*** their
+   projects. The reasoning is that this lockfile provides the
+   benefits listed in [Reproducible installation](#reproducible-installation)
+   by default for privileged environments (project developers' machines,
+   CI, production or other environments with access to sensitive data, 
+   such as secrets, PII, write/push permission to the repository, etc).
    
-   1. If you run CI via GitHub Actions, a non-privileged environment is a workflow **without** access to GitHub secrets and with
-   non-write permissions defined, such as `permissions: read-all`, `permissions:`, `contents: none`, `contents: read`.
-   For more information about permissions, refer to the [official documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token). 
-   You may install the [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
-   to flag non-read permissions on your project.
-   
-   1. In a **non-privileged environment**, you may ignore the lockfile by running `npm install --no-package-lock`.
-   If you are not certain whether the environment you are running is privileged or not, reach out to your security team. 
+   When running tests locally, developers should locally use commands that treat lockfiles
+   as read-only (see [Lockfiles and commands](#lockfiles-and-commands)), unless they
+   are intentionally adding / removing a dependency.
+
+   Below we explain the type of lockfile acceptable by project type.
+
+1. If a project is a library:
+
+   1. An `npm-shrinkwrap.json` ***should not*** be published.
+      The reasoning is that version resolution should be left to the package consumer. 
+      Allow all versions from the minimum to the latest you support, e.g.,
+      `^m.n.o` to pin to a major range; `~m.n.o` to pin to a minor range. Avoid versions
+      with critical vulnerabilities as much as possible. Visit the [semver
+      calculator](https://semver.npmjs.com/) to help you define the ranges.
+
+   1. The lockfile `package-lock.json` ***should*** be ignored for tests running in CI
+      (e.g. via `npm install --no-package-lock`) ***and*** the CI environment should be ***non-privileged***
+      by following the [principle of least privilege](https://www.cisa.gov/uscert/bsi/articles/knowledge/principles/least-privilege).
+      This reasoning is that developers should exercise a wide range of dependency versions
+      in order to discover / fix problems before their users do, so tests need to pull the latest versions
+      of packages.
+
+   1. Follow the principle of least privilege in your [CI configuration](#ci-configuration).
+      This is particularly important since the lockfile is ignored.
+
+1. If a project is a standalone CLI:
+
+   1. Developers may publish an `npm-shrinkwrap.json`. 
+      Remember that, by declaring an `npm-shrinkwrap.json`, you take responsibility 
+      for updating all the dependencies in time. Your users will not be able 
+      to update them. If you expect your CLI to be used by other projects and defined
+      in their `package.json` or lockfile, do **not** use `npm-shrinkwrap.json` because it will
+      hinder dependency resolution for your consumers.
+
+   1. Developers should only run npm commands that treat the lockfile as
+      read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
+      when intentionally adding /removing a dependency.
+
+   1. Follow the principle of least privilege in your [CI configuration](#ci-configuration).
+
+1. If a project is an application:
+
+   1. Developers should declare and commit a lockfile to their repository.
+
+   1. Developers should only run npm commands that treat the lockfile as
+      read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
+      when intentionally adding /removing a dependency.
+
+   1. If you need to run a standalone CLI package from the registry, ensure the package is a part of
+      the dependencies defined in your project via the `package.json` file, prior to
+      being installed at build-time in your CI or otherwise automated environment.
 
 ### Maintenance
 
