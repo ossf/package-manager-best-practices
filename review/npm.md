@@ -324,8 +324,8 @@ unpinned dependencies and update the lockfiles:
 
    1. Developers may publish an `npm-shrinkwrap.json`. 
       Remember that, by declaring an `npm-shrinkwrap.json`, you take responsibility 
-      for updating all the dependencies in time. Your users will not be able 
-      to update them. If you expect your CLI to be used by other projects and defined
+      for rapidly and consistently updating all the dependencies. Your users will not be able 
+      to update or deduplicate them. If you expect your CLI to be used by other projects and defined
       in their `package.json` or lockfile, do **not** use `npm-shrinkwrap.json` because it will
       hinder dependency resolution for your consumers.
 
