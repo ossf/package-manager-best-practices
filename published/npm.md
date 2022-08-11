@@ -1,5 +1,7 @@
 # npm Best Practices Guide
 
+*Version 1.0*
+
 This document aims to be a one-time stop explaining the security supply-chain
 best practices when using npm's package manager. It is one of the workstreams
 of the OSSF's [Best Practices for Open Source
