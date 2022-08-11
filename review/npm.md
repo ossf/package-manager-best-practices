@@ -141,12 +141,9 @@ benefits, including:
   of your dependencies is found to have vulnerabilities, as you will be able to
   quickly determine the commit range when your repository was at risk.
 
-- Mitigating certain threats such as malicious dependencies. A recent example
-  is the [color package's
-  sabotage](https://blog.sonatype.com/npm-libraries-colors-and-faker-sabotaged-in-protest-by-their-maintainer-what-to-do-now):
-  without a reproducible installation, developers installed and ran a newly
-  published (compromised) version of the dependency on their CI/CD system,
-  giving an attacker immediate code execution on their infrastructure.
+- Mitigating certain threats such as malicious dependencies. Otherwise, you might
+  install and run a newly published (compromised) version of the dependency on
+  a CI/CD system or developer machine, giving an attacker immediate code execution.
 
 - Detecting package corruptions before installation, for example due to RAM
   corruption.
