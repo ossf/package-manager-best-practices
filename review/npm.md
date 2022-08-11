@@ -409,17 +409,15 @@ download.
 
 **Recommendations:**
 
-1. Use an [Automation
+1. When using a CI system to publish, use an [Automation
    token](https://docs.npmjs.com/creating-and-viewing-access-tokens) to
    authenticate and publish to the default npm registry.
 
-1. Release your package using the commands
+1. Release your package using the commands:
    ```
    npm ci
    npm publish
    ```
-   through a GitHub workflow as explained in the [official GitHub
-   documentation](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages).
 
 1. Consumers of public packages may fall victim to typosquatting attempts. To
    mitigate this problem, create and own your organization on other registries.
