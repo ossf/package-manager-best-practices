@@ -181,7 +181,7 @@ change to the dependency would be detected and rejected.
 
 Npm provides two options to achieve hash pinning.
 
-##### Package-lock.json
+##### package-lock.json
 
 The
 [package-lock.json](https://docs.npmjs.com/cli/v6/configuring-npm/package-lock-json)
