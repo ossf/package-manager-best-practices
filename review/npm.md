@@ -157,19 +157,8 @@ benefits, including:
 - Let maintainers test updates before accepting them in the default branch, 
   e.g., via renovatebot's [stabilityDays](https://docs.renovatebot.com/configuration-options/#stabilitydays).
 
-There are two ways to reliably achieve a reproducible installation: vendoring
-dependencies and pinning by hash.
-
-#### Vendoring dependencies
-
-Vendoring dependencies means keeping a local copy of all the dependencies
-(direct and transitive) in the repository. While vendoring can solve the
-"reproducable installation" problem, it also can encourage insecure practices.
-These include, poor ability to audit dependency code, difficulties keeping
-dependencies up to date, and more. Also, vendoring introduces non-security problems
-like repository size, usability, and developer experience issues. For these
-reasons, vendoring is not recommended without tooling and solutions to address
-those problems which is outside the scope of this document.
+There are two ways to reliably achieve a reproducible installation: pinning by hash and vendoring
+dependencies.
 
 #### Use a Lockfile
 
@@ -346,6 +335,17 @@ unpinned dependencies and update the lockfiles:
    1. Locally, developers should only run npm commands that treat the lockfile as
       read-only (see [Lockfiles and commands](#lockfiles-and-commands)), except
       when intentionally adding /removing a dependency.
+
+#### Vendoring dependencies
+
+Vendoring dependencies means keeping a local copy of all the dependencies
+(direct and transitive) in the repository. While vendoring can solve the
+"reproducable installation" problem, it also can encourage insecure practices.
+These include, poor ability to audit dependency code, difficulties keeping
+dependencies up to date, and more. Also, vendoring introduces non-security problems
+like repository size, usability, and developer experience issues. For these
+reasons, vendoring is not recommended without tooling and solutions to address
+those problems which is outside the scope of this document.
 
 ### Maintenance
 
