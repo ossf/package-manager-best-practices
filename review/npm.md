@@ -393,9 +393,10 @@ Publishing on the npm registry requires creating a user account.
 
 ### Signing and Verification
 
-npm packages are all signed by a [PGP
-key](https://docs.npmjs.com/about-pgp-signatures-for-packages-in-the-public-registry)
+npm packages are all signed by a [ECDSA Key]([https://docs.npmjs.com/about-pgp-signatures-for-packages-in-the-public-registry](https://docs.npmjs.com/about-registry-signatures))
 owned by the default npm registry.
+
+[Signatures can be verified](https://docs.npmjs.com/verifying-registry-signatures) with the npm CLI v8.15.0 or later with the command `npm audit signatures`.
 
 **Warning**: npm does not support user-level signatures.
 
