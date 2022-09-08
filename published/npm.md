@@ -392,7 +392,7 @@ Software maintainers should make it easy and clear how to privately disclose vul
 
 ### Maintainer to user disclosure
 
-Most projects tend to have vulnerabilities discovered in them over their lifetime and it's important that those vulnerabilities get disclosed to users in a clear and concise manner. Disclosing vulnerabilities with a [CVE](https://cve.mitre.org/), [GHSA](https://docs.github.com/en/code-security/repository-security-advisories/about-github-security-advisories-for-repositories), or other indexing number will allow automated systems to discover, ingest and report to users any relevant vulnerabilities. For these automated systems to work well the source advisory should be as detailed as possible calling out specific npm package names, versions, and code changes which resolve the issue.
+Most projects tend to have vulnerabilities discovered in them over their lifetime and it's important that those vulnerabilities get disclosed to users in a clear and concise manner. Disclosing vulnerabilities with a [CVE](https://cve.mitre.org/), [GHSA](https://docs.github.com/en/code-security/repository-security-advisories/about-github-security-advisories-for-repositories), or other indexing number will allow automated systems to discover, ingest, and report to users any relevant vulnerabilities. For these automated systems to work well the source advisory should be as detailed as possible calling out specific npm package names, versions, and code changes which resolve the issue.
 
 ## Release
 
