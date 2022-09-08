@@ -28,6 +28,7 @@ alternative.
         * [npm-shrinkwrap.json](#npm-shrinkwrapjson)
       - [Lockfiles and commands](#lockfiles-and-commands)
     + [Maintenance](#maintenance)
+    + [Vulnerability Disclosure](#vulnerability-disclosure)
   * [Release](#release)
     + [Account](#account)
     + [Signing and Verification](#signing-and-verification)
@@ -380,6 +381,18 @@ management are easy to use and may implement security checks for you.
    prune`](https://docs.npmjs.com/cli/v8/commands/npm-prune) and submit a merge
    request. Tools above do not support this feature yet, and we are not aware
    of a GitHub action for this feature.
+
+## Vulnerability Disclosure
+
+Vulnerability disclosure comes in two major halves. Researchers discovering and reporting vulnerabilities to software maintainers and software maintainers further notifying the users of their software to known vulnerabilities.
+
+### Researcher to maintainer disclosure
+
+Software maintainers should make it easy and clear how to privately disclose vulnerabilities. GitHub [recommends creating a security.md file](https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository) with contact information that a researcher can use to privately disclose security vulnerabilities they discover. Maintainers should ensure that some method of private communication is possible for well-intentioned security researchers least they accept that all disclosure be public.
+
+### Maintainer to user disclosure
+
+Most projects tend to have vulnerabilities discovered in them over their lifetime and it's important that those vulnerabilities get disclosed to users in a clear and concise manner. Disclosing vulnerabilities with a [CVE](https://cve.mitre.org/), [GHSA](https://docs.github.com/en/code-security/repository-security-advisories/about-github-security-advisories-for-repositories), or other indexing number will allow automated systems to discover, ingest and report to users any relevant vulnerabilities. For these automated systems to work well the source advisory should be as detailed as possible calling out specific npm package names, versions, and code changes which resolve the issue.
 
 ## Release
 
