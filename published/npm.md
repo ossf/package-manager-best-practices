@@ -140,7 +140,7 @@ benefits, including:
 - Ensuring the dependencies installed are the ones declared and reviewed via
   pull requests.
 
-- Helping quickly indentify possible compromises of your infrastructure if one
+- Helping quickly identify possible compromises of your infrastructure if one
   of your dependencies is found to have vulnerabilities, as you will be able to
   promptly determine the commit range of when your repository is at risk.
 
