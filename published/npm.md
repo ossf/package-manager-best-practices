@@ -29,6 +29,7 @@ group. This document provides
         - [npm-shrinkwrap.json](#npm-shrinkwrapjson)
       - [Lockfiles and commands](#lockfiles-and-commands)
     - [Maintenance](#maintenance)
+    - [Vulnerability Disclosure](#vulnerability-disclosure)
   - [Release](#release)
     - [Account](#account)
     - [Signing and Verification](#signing-and-verification)
@@ -140,7 +141,7 @@ benefits, including:
 - Ensuring the dependencies installed are the ones declared and reviewed via
   pull requests.
 
-- Helping quickly identify possible compromises of your infrastructure if one
+- Helping quickly indentify possible compromises of your infrastructure if one
   of your dependencies is found to have vulnerabilities, as you will be able to
   promptly determine the commit range of when your repository is at risk.
 
@@ -376,6 +377,18 @@ management are easy to use and may implement security checks for you.
 3. To remove dependencies, periodically run [`npm prune`](https://docs.npmjs.com/cli/v8/commands/npm-prune) and submit a merge
    request. The tools above do not support this feature yet, and we are not aware
    of a GitHub action for this feature.
+
+## Vulnerability Disclosure
+
+Vulnerability disclosure comes in two major halves. Researchers discovering and reporting vulnerabilities to software maintainers and software maintainers further notifying the users of their software to known vulnerabilities. The [OpenSSF](https://openssf.org/) [maintains a set of general recommendations](https://github.com/ossf/oss-vulnerability-guide/) regarding vulnerability disclosure which maintainers should consult for more details.
+
+### Researcher to maintainer disclosure
+
+Software maintainers should make it easy and clear how to privately disclose vulnerabilities. GitHub [recommends creating a security.md file](https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository) with contact information that a researcher can use to privately disclose security vulnerabilities they discover. Maintainers should ensure that some method of private communication is possible for well-intentioned security researchers lest they accept that all disclosure be public.
+
+### Maintainer to user disclosure
+
+Most projects tend to have vulnerabilities discovered in them over their lifetime and it's important that those vulnerabilities get disclosed to users in a clear and concise manner. Disclosing vulnerabilities with a [CVE](https://cve.mitre.org/), [GHSA](https://docs.github.com/en/code-security/repository-security-advisories/about-github-security-advisories-for-repositories), or other indexing number will allow automated systems to discover, ingest, and report to users any relevant vulnerabilities. For these automated systems to work well the source advisory should be as detailed as possible calling out specific npm package names, versions, and code changes which resolve the issue.
 
 ## Release
 
