@@ -431,6 +431,9 @@ download.
 
 3. Consumers of public packages may fall victim to typosquatting attempts. To
    mitigate this problem, and create and own your organization on other registries.
+   
+4. The emails associated with the publisher account and the maintainers (who 
+   can publish) are exposed in the npm API as part of the metadata.
 
 **Note**:
 
